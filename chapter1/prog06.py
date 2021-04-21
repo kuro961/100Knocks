@@ -1,12 +1,12 @@
-def get_char_ngram(string: str, n: int):
-    return [string[i:i+n] for i in range(len(string) - n + 1)]
+def get_ngram(target, n):
+    return [target[i:i+n] for i in range(len(target) - n + 1)]
 
 def main():
     str1 = "paraparaparadise"
     str2 = "paragraph"
 
-    str1_char_bigram = set(get_char_ngram(str1, 2))
-    str2_char_bigram = set(get_char_ngram(str2, 2))
+    str1_char_bigram = set(get_ngram(str1, 2))
+    str2_char_bigram = set(get_ngram(str2, 2))
     print("X:", str1_char_bigram, "\nY:", str2_char_bigram)
     print("和集合:", str1_char_bigram | str2_char_bigram)
     print("積集合:", str1_char_bigram & str2_char_bigram)

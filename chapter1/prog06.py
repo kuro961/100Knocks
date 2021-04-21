@@ -1,5 +1,5 @@
-def get_char_ngram(str: str, n: int):
-    return [str[i:i+n] for i in range(len(str) - n + 1)]
+def get_char_ngram(string: str, n: int):
+    return [string[i:i+n] for i in range(len(string) - n + 1)]
 
 def main():
     str1 = "paraparaparadise"

@@ -1,3 +1,3 @@
-str = "stressed"
-reverse_str = str[::-1]
+string = "stressed"
+reverse_str = string[::-1]
 print(reverse_str)

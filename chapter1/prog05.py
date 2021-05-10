@@ -4,7 +4,7 @@ def get_ngram(target, n):
 def main():
     string = "I am an NLPer"
     print(get_ngram(string, 2))
-    print(get_ngram(string.split(),3))
+    print(get_ngram(string.split(), 3))
 
 if __name__ == '__main__':
     main()

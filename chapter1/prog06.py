@@ -1,5 +1,4 @@
-def get_ngram(target, n):
-    return [target[i:i+n] for i in range(len(target) - n + 1)]
+from prog05 import get_ngram
 
 def main():
     str1 = "paraparaparadise"

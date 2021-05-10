@@ -1,5 +1,5 @@
 def get_text(x: int, y: str, z: float):
-    return str(x) + "時の" + y + "は" + str(z)
+    return f'{x}時の{y}は{z}'
 
 def main():
     x = 12

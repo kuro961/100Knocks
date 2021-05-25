@@ -1,13 +1,15 @@
-import sys
+import argparse
 import pandas as pd
 
 def main():
-    if len(sys.argv) == 1:
-        print('行数Nを指定してください')
-    else:
-        n = int(sys.argv[1])
-        df = pd.read_table('popular-names.txt', header=None)
-        print(df.tail(n))
+    parser = argparse.ArgumentParser()
+    parser.add_argument('file')
+    parser.add_argument('N', help='number of lines')
+    args = parser.parse_args()
+
+    df = pd.read_table(args.file, header=None)
+    N = int(args.N)
+    print(df.tail(N))
 
 if __name__ == '__main__':
     main()

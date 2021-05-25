@@ -3,8 +3,8 @@ import pandas as pd
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('src_file')
-    parser.add_argument('dst_file')
+    parser.add_argument('--src_file', default='popular-names.txt')
+    parser.add_argument('--dst_file', default='ans11.txt')
     args = parser.parse_args()
 
     df = pd.read_table(args.src_file, header=None)

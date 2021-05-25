@@ -3,9 +3,9 @@ import pandas as pd
 
 def mian():
     parser = argparse.ArgumentParser()
-    parser.add_argument('src_file')
-    parser.add_argument('dst_file1')
-    parser.add_argument('dst_file2')
+    parser.add_argument('--src_file', default='popular-names.txt')
+    parser.add_argument('--dst_file1', default='col1.txt')
+    parser.add_argument('--dst_file2', default='col2.txt')
     args = parser.parse_args()
 
     df = pd.read_table(args.src_file, header=None)

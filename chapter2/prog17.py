@@ -3,7 +3,7 @@ import pandas as pd
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('file')
+    parser.add_argument('--file', default='popular-names.txt')
     args = parser.parse_args()
 
     df = pd.read_table(args.file, header=None)

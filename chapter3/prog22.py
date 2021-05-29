@@ -1,17 +1,13 @@
-from prog20 import my_argparse
+from prog20 import my_argparse, get_uk_text
 import re
-import pandas as pd
 
 def main():
     args = my_argparse()
 
-    df = pd.read_json(args.file, lines=True)
-    uk_text = df[df['title'] == 'イギリス']['text'].values[0]
+    uk_texts = get_uk_text(args.file)
 
-    uk_texts = uk_text.split('\n')
-    ans = list(filter(lambda x: '[Category:' in x, uk_texts))
-
-    ans = [re.search(r'(?<=\[\[Category:)[^|*\]]+', i).group() for i in ans]
+    ans = [re.search(r'(?<=\[\[Category:)[^|*\]]+', i) for i in uk_texts]
+    ans = [m_obj.group() for m_obj in ans if m_obj is not None]
     print(ans)
 
 if __name__ == '__main__':

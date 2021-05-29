@@ -1,19 +1,17 @@
-from prog20 import my_argparse
+from prog20 import my_argparse, get_uk_text
 import re
-import pandas as pd
 
 def remove_emphasis(text):
     return re.sub(r"'{5}|'{3}|'{2}", '', text)
 
 def remove_internal_links(text):
-    return re.sub(r'\[\[(([^|\]]+)|(([^|\]]+)\|([^|\]]+)))]]', r'\2 \4 \5', text)
+    # [[]]を消すだけの場合
+    return re.sub(r'\[\[(.*?)]]', r'\1', text)
 
 def main():
     args = my_argparse()
 
-    df = pd.read_json(args.file, lines=True)
-    uk_text = df[df['title'] == 'イギリス']['text'].values[0]
-    uk_texts = uk_text.split('\n')
+    uk_texts = get_uk_text(args.file)
 
     ans = {}
     for line in uk_texts:

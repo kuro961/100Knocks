@@ -1,6 +1,5 @@
-from prog20 import my_argparse
+from prog20 import my_argparse, get_uk_text
 import re
-import pandas as pd
 
 def remove_mk(text):
     #強調マークアップの除去
@@ -8,8 +7,9 @@ def remove_mk(text):
     text = re.sub(r"'{5}|'{3}|'{2}", '', text)
 
     #内部リンク、ファイルの除去
-    #除去対象:[[記事名]], [[記事名|表示文字]], [[記事名#節名|表示文字]], [[ファイル:Wikipedia.png|thumb|説明文]]
-    text = re.sub(r'\[\[(([^|\]]+\|)*?[^|\]]+)]]', r'\1', text)
+    #除去対象:[[記事名]], [[記事名|表示文字]], [[記事名#節名|表示文字]], [[ファイル:Wikipedia-logo-v2-ja.png|thumb|説明文]]
+    # [[]]を消すだけの場合
+    text = re.sub(r'\[\[(.*?)]]', r'\1', text)
 
     #外部リンクの除去
     #除去対象:[http://www.example.org 表示文字], [http://www.example.org], http://www.example.org
@@ -29,9 +29,7 @@ def remove_mk(text):
 def main():
     args = my_argparse()
 
-    df = pd.read_json(args.file, lines=True)
-    uk_text = df[df['title'] == 'イギリス']['text'].values[0]
-    uk_texts = uk_text.split('\n')
+    uk_texts = get_uk_text(args.file)
 
     original = {}
     ans = {}

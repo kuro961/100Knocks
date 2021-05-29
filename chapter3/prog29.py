@@ -1,28 +1,25 @@
-from prog20 import my_argparse
+from prog20 import my_argparse, get_uk_text
 import re
 import requests
-import pandas as pd
+
+URL = 'https://www.mediawiki.org/w/api.php'
 
 def main():
     args = my_argparse()
 
-    df = pd.read_json(args.file, lines=True)
-    uk_text = df[df['title'] == 'イギリス']['text'].values[0]
-    uk_texts = uk_text.split('\n')
+    uk_texts = get_uk_text(args.file)
 
-    ans = {}
+    url_national_flag = {}
     for line in uk_texts:
         info = re.search(r'^\|([^=]+)\s=\s*(.*)', line)
-        if info:
-            ans[info[1]] = info[2]
-    url_national_flag = ans['国旗画像']
-    URL = 'https://www.mediawiki.org/w/api.php'
+        if info and info[1] == '国旗画像':
+            url_national_flag = info[2]
     PARAMS = {
         "action": "query",
         "format": "json",
         "prop": "imageinfo",
         "iiprop": "url",
-        "titles": "File:" + url_national_flag,
+        "titles": "File:" + url_national_flag
     }
     R = requests.get(url=URL, params=PARAMS)
     DATA = R.json()

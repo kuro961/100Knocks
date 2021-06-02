@@ -11,7 +11,7 @@ def parse_mecab(block):
     result = []
     for line in block.split('\n'):
         if line == '':
-            return result
+            break
         (surface, attr) = line.split('\t')
         attr = attr.split(',')
         # surface:表層形, base:基本形, pos:品詞, pos1:品詞細分類1
@@ -22,6 +22,8 @@ def parse_mecab(block):
             'pos1': attr[1]
         }
         result.append(line_dict)
+
+    return result
 
 def read_mecab(file_name):
     with open(file_name, 'r') as f:

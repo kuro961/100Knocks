@@ -1,0 +1,7 @@
+fairseq-preprocess -s ja -t en \
+--trainpref kftt-data-1.0/data/tok/kyoto-train.cln \
+--validpref kftt-data-1.0/data/tok/kyoto-dev \
+--destdir data91 \
+--thresholdsrc 5 \
+--thresholdtgt 5 \
+--workers 20
